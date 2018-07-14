@@ -8,20 +8,25 @@ const jobs = require('./routes/api/jobs');
 const app = express();
 
 app.options('*', cors())
+app.all('/', function (req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "X-Requested-With");
+    next();
+});
 
 app.use('/api/jobs', jobs);
 app.use(cors());
-app.use(function (req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next();
-});
+
 
 // Serve static assets if in production
 // if (process.env.NODE_ENV === 'production') {
 //     app.use(express.static('client/build'));
 // }
-
+app.use(function (req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
 app.use(express.static('client/build'));
 
 

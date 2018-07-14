@@ -68,7 +68,7 @@ export default class JobSearchView extends Component {
             console.log("fetchJobListings - Recent posts");
             axios.post('https://cors-anywhere.herokuapp.com/https://ba.jooble.org/api/2347891c-4970-4bb3-b09f-a64a469ce1aa', {
                 keywords: " ",
-                // location: 'mostar'
+                location: 'mostar'
             })
                 .then((response) => {
                     // console.log("Recent jobs - response", response.data.jobs);
