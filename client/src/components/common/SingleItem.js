@@ -6,6 +6,10 @@ import en from 'javascript-time-ago/locale/en';
 
 
 export default class SingleItem extends Component {
+    cardClickHandler(){
+
+    }
+
     render() {
         let job = {};
         if (this.props.job) {
@@ -18,7 +22,7 @@ export default class SingleItem extends Component {
 
 
         return (
-            <Card fluid style={{ maxHeight: "500px", marginBottom: "15px" }} onClick={(e) => console.log(e)} >
+            <Card fluid style={{ maxHeight: "500px", marginBottom: "15px" }} onClick={this.cardClickHandler.bind(this)} >
                 <Card.Content>
                     <Image floated='left' size='mini' src={nsoftLogo} />
                     <Card.Header>{job.title}</Card.Header>

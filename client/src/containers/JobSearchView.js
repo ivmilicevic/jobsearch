@@ -12,26 +12,34 @@ import SearchOptions from '../components/common/SearchOptions';
 
 // Helpers functions
 import removeDuplicates from '../helpers/removeDuplicates';
+import isEmpty from '../helpers/isEmpty';
+import categories from '../config/categories';
+import locations from '../config/locations';
 
 export default class JobSearchView extends Component {
     constructor(props) {
         super(props);
+
+        this.state = {
+            jobs: [],
+            selectedJob: "",
+            selectedJobDescription: {
+                __html: ""
+            },
+            selectedCategories: [],
+            selectedLocation: "",
+            selectedRadius: ""
+        }
 
         this.jobClickHandler = this.jobClickHandler.bind(this);
         this.loadJobByLink = this.loadJobByLink.bind(this);
         this.categoryClickHandler = this.categoryClickHandler.bind(this);
         this.removeCategoryHandler = this.removeCategoryHandler.bind(this);
         this.fetchJobListings = this.fetchJobListings.bind(this);
-        this.categorySearchHandler = this.categorySearchHandler.bind(this);
-    }
+        // this.categorySearchHandler = this.categorySearchHandler.bind(this);
+        this.searchButtonHandler = this.searchButtonHandler.bind(this);
+        this.categorySearchChangeHandler = this.categorySearchChangeHandler.bind(this);
 
-    state = {
-        jobs: [],
-        selectedJob: "",
-        selectedJobDescription: {
-            __html: ""
-        },
-        selectedCategories: []
     }
 
     componentDidMount() {
@@ -42,16 +50,22 @@ export default class JobSearchView extends Component {
 
     fetchJobListings() {
         const keywordsArray = this.state.selectedCategories;
+        const location = isEmpty(this.state.selectedLocation) ? "" : this.state.selectedLocation;
+        const radius = isEmpty(this.state.selectedRadius) ? "" : this.state.selectedRadius;
+        // const requestOptions = {keywords, location, radius};
         let jobs = [];
 
         if (typeof keywordsArray !== 'undefined' && keywordsArray.length > 0) {
             // the array is defined and has at least one element
             console.log("fetchJobListings - Inside multiple category search");
             keywordsArray.forEach((keyword) => {
-                axios.post('https://cors-anywhere.herokuapp.com/https://ba.jooble.org/api/336d41a0-2c32-42fe-9a4f-351cda0f1187', {
-                    keywords: keyword,
-                    // location: 'mostar'
-                })
+                axios
+                    .post('https://cors-anywhere.herokuapp.com/https://ba.jooble.org/api/336d41a0-2c32-42fe-9a4f-351cda0f1187', {
+                        keywords: keyword,
+                        location: location,
+                        radius: radius
+
+                    })
                     .then((response) => {
                         jobs = jobs.concat(response.data.jobs);
                         // remove duplicates to prevent multiple items with same key
@@ -69,7 +83,8 @@ export default class JobSearchView extends Component {
             console.log("fetchJobListings - Recent posts");
             axios.post('https://cors-anywhere.herokuapp.com/https://ba.jooble.org/api/336d41a0-2c32-42fe-9a4f-351cda0f1187', {
                 keywords: " ",
-                location: 'mostar'
+                location: location,
+                radius: radius
             })
                 .then((response) => {
                     // console.log("Recent jobs - response", response.data.jobs);
@@ -94,11 +109,11 @@ export default class JobSearchView extends Component {
         });
     }
 
-    categorySearchHandler(value) {
-        console.log(value);
-        // categoryClickHandler expects input in format of {object}.key = value
-        this.categoryClickHandler({ key: value })
-    }
+    // categorySearchHandler(value) {
+    //     console.log(value);
+    //     // categoryClickHandler expects input in format of {object}.key = value
+    //     this.categoryClickHandler({ key: value })
+    // }
 
 
     loadJobByLink(link) {
@@ -146,7 +161,22 @@ export default class JobSearchView extends Component {
                 selectedCategories: currentCategories
             }
         }), this.fetchJobListings);
+    }
 
+    searchButtonHandler = (e) => {
+        this.fetchJobListings();
+    }
+
+    categorySearchChangeHandler = (e, { value }) => {
+        this.setState({ selectedCategories: value })
+    }
+
+    locationChangeHandler = (e, { value }) => {
+        this.setState({ selectedLocation: value })
+    }
+
+    radiusChangeHandler = (e, { value }) => {
+        this.setState({ selectedRadius: value })
     }
 
 
@@ -159,7 +189,16 @@ export default class JobSearchView extends Component {
                     <Grid >
                         <Grid.Row >
                             <Grid.Column width={4} style={maxHeightStyle}>
-                                <SearchOptions />
+                                <SearchOptions
+                                    categories={categories}
+                                    locations={locations}
+                                    searchButtonHandler={this.searchButtonHandler}
+                                    selectedCategories={this.state.selectedCategories}
+                                    categorySearchChangeHandler={this.categorySearchChangeHandler}
+                                    selectedLocation={this.state.selectedLocation}
+                                    selectedRadius={this.state.selectedRadius}
+                                    locationChangeHandler={this.locationChangeHandler}
+                                    radiusChangeHandler={this.radiusChangeHandler} />
                                 {/* <Sidebar
                                     categoryClickHandler={this.categoryClickHandler}
                                     selectedCategories={this.state.selectedCategories}

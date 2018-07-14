@@ -56,26 +56,6 @@ export default class Sidebar extends Component {
             }
         ];
 
-        const dropdownOptions = [
-            {
-                key: 'designer',
-                value: 'designer',
-                text: 'Designer'
-            },
-            {
-                key: 'developer',
-                value: 'developer',
-                text: 'Developer'
-            },
-            {
-                key: 'manager',
-                value: 'manager',
-                text: 'Manager'
-            }
-        ];
-
-
-
         const subMenus = menuPositionNames.map((category, index) => (
             <SubMenu
                 key={category.categoryName}

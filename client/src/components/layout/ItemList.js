@@ -3,12 +3,12 @@ import SingleItem from '../common/SingleItem';
 
 export default class ItemList extends Component {
 
-    componentWillReceiveProps(nextProps) {
-        if (this.props.jobs !== nextProps.jobs) {
-            console.log("ItemList - Force update")
-            this.forceUpdate();
-        }
-    }
+    // componentWillReceiveProps(nextProps) {
+    //     if (this.props.jobs !== nextProps.jobs) {
+    //         console.log("ItemList - Force update")
+    //         this.forceUpdate();
+    //     }
+    // }
 
     render() {
         let items = [];

@@ -7,14 +7,27 @@ import CategorySearch from './CategorySearch';
 
 export default class SearchOptions extends Component {
     render() {
-
-
         return (
             <Container style={{ paddingLeft: "14px" }}>
-                <CategorySearch />
-                <LocationSelector />
+                <CategorySearch
+                    categories={this.props.categories}
+                    selectedCategories={this.props.selectedCategories}
+                    categorySearchChangeHandler={this.props.categorySearchChangeHandler} />
+                <LocationSelector
+                    locations={this.props.locations}
+                    locationChangeHandler={this.props.locationChangeHandler}
+                    selectedLocation={this.props.selectedLocation}
+                    radiusChangeHandler={this.props.radiusChangeHandler}
+                    selectedRadius={this.props.selectedRadius}
+                />
                 <CategorySelectionButtons />
-                <Button positive fluid>Refresh</Button>
+                <Button
+                    positive
+                    fluid
+                    onClick={this.props.searchButtonHandler}
+                >
+                    Refresh
+                 </Button>
             </Container>
         )
     }

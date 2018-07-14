@@ -4,9 +4,7 @@ import { Container, Dropdown } from 'semantic-ui-react';
 
 export default class LocationSelector extends Component {
     render() {
-        const citiesArray = ['Banovići', 'Banja Luka', 'Berkovići', 'Bihać', 'Bileća', 'Bijeljina', 'Bosanska Dubica', 'Bosanska Gradiška', 'Bosansko Grahovo', 'Bosanska Krupa', 'Bosanska Kostajnica', 'Bosanski Brod', 'Bosanski Novi', 'Bosanski Petrovac', 'Bosanski Šamac', 'Bratunac', 'Brčko', 'Breza', 'Bugojno', 'Busovača', 'Bužim', 'Cazin', 'Čajniče', 'Čapljina', 'Čelić', 'Čitluk', 'Čelinac', 'Doboj', 'Dobretići', 'Domaljevac', 'Donji Vakuf', 'Drvar', 'Derventa', 'Foča', 'Fojnica', 'Gacko', 'Glamoč', 'Gračanica', 'Gradačac', 'Grude', 'Goražde', 'Gornji Vakuf', 'Jablanica', 'Jajce', 'Kakanj', 'Kalesija', 'Kalinovik', 'Kiseljak', 'Kladanj', 'Ključ', 'Konjic', 'Kotor-Varoš', 'Kreševo', 'Kupres', 'Laktaši', 'Livno', 'Lukavac', 'Lopare', 'Ljubinje', 'Ljubuški', 'Maglaj', 'Milići', 'Modriča', 'Mostar', 'Mrkonjić Grad', 'Neum', 'Nevesinje', 'Novi Travnik', 'Odžak', 'Olovo', 'Orašje', 'Pale', 'Posušje', 'Prozor-Rama', 'Pale-Prača', 'Prijedor', 'Prnjavor', 'Ravno', 'Rogatica', 'Rudo', 'Sanski Most', 'Sapna', 'Sarajevo', 'Skender Vakuf', 'Sokolac', 'Srbac', 'Srebrenica', 'Srebrenik', 'Stanari', 'Stolac', 'Šipovo', 'Široki Brijeg', 'Teočak', 'Teslić', 'Tešanj', 'Tomislavgrad', 'Travnik', 'Trebinje', 'Tuzla', 'Usora', 'Ustiprača', 'Vareš', 'Velika Kladuša', 'Visoko', 'Višegrad', 'Vitez', 'Vogošća', 'Vlasenica', 'Zavidovići', 'Zenica', 'Žepče', 'Živinice', 'Zvornik'];
-
-        const locationDropdownOptions = citiesArray.map(city => ({
+        const locationDropdownOptions = this.props.locations.map(city => ({
             key: city,
             value: city,
             text: city
@@ -47,14 +45,18 @@ export default class LocationSelector extends Component {
                     selection
                     options={locationDropdownOptions}
                     fluid
-                    style={{ marginBottom: "10px" }} />
+                    style={{ marginBottom: "10px" }}
+                    value={this.props.selectedLocation}
+                    onChange={this.props.locationChangeHandler} />
                 <Dropdown
                     placeholder='Distance'
-                    search
                     selection
                     options={distanceDropdownOptions}
                     fluid
-                    style={{ marginBottom: "10px" }} />
+                    style={{ marginBottom: "10px" }}
+                    value={this.props.selectedRadius}
+                    onChange={this.props.radiusChangeHandler}
+                />
             </Container>
         )
     }

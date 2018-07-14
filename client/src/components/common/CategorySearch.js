@@ -2,24 +2,39 @@ import React, { Component } from 'react';
 import { Dropdown } from 'semantic-ui-react';
 
 export default class CategorySearch extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            dropdownOptions: []
+        }
+    }
+
+    componentDidMount() {
+        let dropdownOptions = [];
+        if (this.props.categories) {
+            let categoriesArray = this.props.categories
+                .map(group => group.items);
+            categoriesArray = [].concat.apply([], categoriesArray);
+
+            dropdownOptions = categoriesArray.map(category => ({
+                key: category,
+                value: category,
+                text: category
+            }));
+
+            this.setState({ dropdownOptions })
+        }
+    }
+
+    handleAddition = (e, { value }) => {
+        console.log(value);
+        this.setState({
+            dropdownOptions: [{ text: value, value, key: value }, ...this.state.dropdownOptions],
+        })
+    }
+
     render() {
-        const dropdownOptions = [
-            {
-                key: 'designer',
-                value: 'designer',
-                text: 'designer'
-            },
-            {
-                key: 'developer',
-                value: 'developer',
-                text: 'developer'
-            },
-            {
-                key: 'manager',
-                value: 'manager',
-                text: 'danager'
-            }
-        ];
+        const { dropdownOptions, currentValues } = this.state;
 
         return (
             <Dropdown
@@ -32,6 +47,11 @@ export default class CategorySearch extends Component {
                 allowAdditions
                 additionLabel='Add: '
                 style={{ marginBottom: "10px" }}
+                closeOnChange
+                deburr
+                onAddItem={this.handleAddition}
+                value={this.props.selectedCategories}
+                onChange={this.props.categorySearchChangeHandler}
             />
         )
     }
