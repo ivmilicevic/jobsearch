@@ -1,8 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const xray = require('x-ray');
+const cors = require('cors');
 
 const x = xray();
+router.all('*', cors());
 
 
 // @route    GET api/jobs/test
