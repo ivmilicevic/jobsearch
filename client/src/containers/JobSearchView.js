@@ -8,6 +8,7 @@ import axios from 'axios';
 // import SingleItem from '../components/common/SingleItem';
 import DetailView from '../components/common/DetailView';
 import ItemList from '../components/layout/ItemList';
+import SearchOptions from '../components/common/SearchOptions';
 
 // Helpers functions
 import removeDuplicates from '../helpers/removeDuplicates';
@@ -158,12 +159,13 @@ export default class JobSearchView extends Component {
                     <Grid >
                         <Grid.Row >
                             <Grid.Column width={4} style={maxHeightStyle}>
-                                <Sidebar
+                                <SearchOptions />
+                                {/* <Sidebar
                                     categoryClickHandler={this.categoryClickHandler}
                                     selectedCategories={this.state.selectedCategories}
                                     removeCategoryHandler={this.removeCategoryHandler}
                                     categorySearchHandler={this.categorySearchHandler}
-                                />
+                                /> */}
                             </Grid.Column>
                             <Grid.Column width={4} style={maxHeightStyle}>
                                 <ItemList

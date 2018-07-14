@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Layout, Menu, Icon } from 'antd';
-import { Input } from 'antd';
+import { Input, Card } from 'antd';
 import CategorySelectionButtons from '../common/CategorySelectionButtons';
+import { Dropdown } from 'semantic-ui-react';
 
 const Search = Input.Search;
 
@@ -52,6 +53,24 @@ export default class Sidebar extends Component {
                     "Dostavljac",
                     "Recepcija"
                 ]
+            }
+        ];
+
+        const dropdownOptions = [
+            {
+                key: 'designer',
+                value: 'designer',
+                text: 'Designer'
+            },
+            {
+                key: 'developer',
+                value: 'developer',
+                text: 'Developer'
+            },
+            {
+                key: 'manager',
+                value: 'manager',
+                text: 'Manager'
             }
         ];
 
