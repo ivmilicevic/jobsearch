@@ -47,7 +47,7 @@ export default class JobSearchView extends Component {
             // the array is defined and has at least one element
             console.log("fetchJobListings - Inside multiple category search");
             keywordsArray.forEach((keyword) => {
-                axios.post('https://cors-anywhere.herokuapp.com/https://ba.jooble.org/api/2347891c-4970-4bb3-b09f-a64a469ce1aa', {
+                axios.post('https://cors-anywhere.herokuapp.com/https://ba.jooble.org/api/336d41a0-2c32-42fe-9a4f-351cda0f1187', {
                     keywords: keyword,
                     // location: 'mostar'
                 })
@@ -66,7 +66,7 @@ export default class JobSearchView extends Component {
         else {
             // array is empty, so get recent job postings
             console.log("fetchJobListings - Recent posts");
-            axios.post('https://cors-anywhere.herokuapp.com/https://ba.jooble.org/api/2347891c-4970-4bb3-b09f-a64a469ce1aa', {
+            axios.post('https://cors-anywhere.herokuapp.com/https://ba.jooble.org/api/336d41a0-2c32-42fe-9a4f-351cda0f1187', {
                 keywords: " ",
                 location: 'mostar'
             })
