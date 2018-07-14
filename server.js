@@ -1,13 +1,14 @@
 const express = require('express');
 const path = require('path');
+const cors = require('cors');
 
 // Import routes
 const jobs = require('./routes/api/jobs');
 
 const app = express();
 
-
 app.use('/api/jobs', jobs);
+app.use(cors());
 
 // Serve static assets if in production
 // if (process.env.NODE_ENV === 'production') {
