@@ -35,6 +35,6 @@ app.get('*', (req, res) => {
 })
 
 // Uses port 80 on deployed server or port 5000 locally
-const port = process.env.port || 5000;
+const port = 80;
 
 app.listen(port, () => console.log(`Server running on port ${port}`));
