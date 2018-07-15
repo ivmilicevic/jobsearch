@@ -51,7 +51,8 @@ export default class CategorySearch extends Component {
                 deburr
                 onAddItem={this.handleAddition}
                 value={this.props.selectedCategories}
-                onChange={this.props.categorySearchChangeHandler}
+                onChange={this.props.dropdownChangeHandler}
+                className="selectedCategories"
             />
         )
     }

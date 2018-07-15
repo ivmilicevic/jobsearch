@@ -48,7 +48,8 @@ export default class LocationSelector extends Component {
                     fluid
                     style={{ marginBottom: "10px" }}
                     value={this.props.selectedLocation}
-                    onChange={this.props.locationChangeHandler} />
+                    onChange={this.props.dropdownChangeHandler}
+                    className="selectedLocation" />
                 <Dropdown
                     placeholder='Distance'
                     selection
@@ -56,7 +57,8 @@ export default class LocationSelector extends Component {
                     fluid
                     style={{ marginBottom: "10px" }}
                     value={this.props.selectedRadius}
-                    onChange={this.props.radiusChangeHandler}
+                    onChange={this.props.dropdownChangeHandler}
+                    className="selectedRadius"
                 />
             </Container>
         )

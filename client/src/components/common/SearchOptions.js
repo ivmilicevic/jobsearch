@@ -10,11 +10,10 @@ export default class SearchOptions extends Component {
             <Container style={{ paddingLeft: "14px" }}>
                 <CategorySearch
                     selectedCategories={this.props.selectedCategories}
-                    categorySearchChangeHandler={this.props.categorySearchChangeHandler} />
+                    dropdownChangeHandler={this.props.dropdownChangeHandler} />
                 <LocationSelector
-                    locationChangeHandler={this.props.locationChangeHandler}
+                    dropdownChangeHandler={this.props.dropdownChangeHandler}
                     selectedLocation={this.props.selectedLocation}
-                    radiusChangeHandler={this.props.radiusChangeHandler}
                     selectedRadius={this.props.selectedRadius}
                 />
                 <Button

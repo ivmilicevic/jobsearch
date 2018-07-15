@@ -34,8 +34,7 @@ export default class JobSearchView extends Component {
         this.categoryClickHandler = this.categoryClickHandler.bind(this);
         this.fetchJobListings = this.fetchJobListings.bind(this);
         this.searchButtonHandler = this.searchButtonHandler.bind(this);
-        this.categorySearchChangeHandler = this.categorySearchChangeHandler.bind(this);
-
+        this.dropdownChangeHandler = this.dropdownChangeHandler.bind(this);
     }
 
     componentDidMount() {
@@ -135,16 +134,10 @@ export default class JobSearchView extends Component {
         this.fetchJobListings();
     }
 
-    categorySearchChangeHandler = (e, { value }) => {
-        this.setState({ selectedCategories: value })
-    }
-
-    locationChangeHandler = (e, { value }) => {
-        this.setState({ selectedLocation: value })
-    }
-
-    radiusChangeHandler = (e, { value }) => {
-        this.setState({ selectedRadius: value })
+    dropdownChangeHandler = (e, data) => {
+        // Each dropdown has className with corresponding state value
+        // TODO
+        this.setState({ [data.className]: data.value });
     }
 
 
@@ -160,15 +153,12 @@ export default class JobSearchView extends Component {
                                 <SearchOptions
                                     searchButtonHandler={this.searchButtonHandler}
                                     selectedCategories={this.state.selectedCategories}
-                                    categorySearchChangeHandler={this.categorySearchChangeHandler}
                                     selectedLocation={this.state.selectedLocation}
                                     selectedRadius={this.state.selectedRadius}
-                                    locationChangeHandler={this.locationChangeHandler}
-                                    radiusChangeHandler={this.radiusChangeHandler} />
+                                    dropdownChangeHandler={this.dropdownChangeHandler}
+                                />
                                 <Sidebar
                                     categoryClickHandler={this.categoryClickHandler}
-                                    selectedCategories={this.state.selectedCategories}
-                                    categorySearchHandler={this.categorySearchHandler}
                                 />
                             </Grid.Column>
                             <Grid.Column width={4} style={maxHeightStyle}>
