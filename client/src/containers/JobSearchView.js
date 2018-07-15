@@ -107,7 +107,7 @@ export default class JobSearchView extends Component {
         const firstIndex = link.search("desc/") + "desc/".length;
         const secondIndex = link.search("ckey") - 1;
         const id = link.substring(firstIndex, secondIndex);
-        axios.get(`http://localhost:5000/api/jobs/${id}`)
+        axios.get(`http://localhost/api/jobs/${id}`)
             .then((res) => {
                 this.setState({
                     selectedJobDescription: { __html: res.data }
