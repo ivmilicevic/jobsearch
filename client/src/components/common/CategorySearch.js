@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Dropdown } from 'semantic-ui-react';
+import categories from '../../config/categories';
 
 export default class CategorySearch extends Component {
     constructor(props) {
@@ -11,8 +12,8 @@ export default class CategorySearch extends Component {
 
     componentDidMount() {
         let dropdownOptions = [];
-        if (this.props.categories) {
-            let categoriesArray = this.props.categories
+        if (categories) {
+            let categoriesArray = categories
                 .map(group => group.items);
             categoriesArray = [].concat.apply([], categoriesArray);
 
@@ -34,7 +35,7 @@ export default class CategorySearch extends Component {
     }
 
     render() {
-        const { dropdownOptions, currentValues } = this.state;
+        const { dropdownOptions } = this.state;
 
         return (
             <Dropdown

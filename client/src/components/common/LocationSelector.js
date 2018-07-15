@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { Container, Dropdown } from 'semantic-ui-react';
+import locations from '../../config/locations';
 
 
 export default class LocationSelector extends Component {
     render() {
-        const locationDropdownOptions = this.props.locations.map(city => ({
+        const locationDropdownOptions = locations.map(city => ({
             key: city,
             value: city,
             text: city

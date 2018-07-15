@@ -13,8 +13,6 @@ import SearchOptions from '../components/common/SearchOptions';
 // Helpers functions
 import removeDuplicates from '../helpers/removeDuplicates';
 import isEmpty from '../helpers/isEmpty';
-import categories from '../config/categories';
-import locations from '../config/locations';
 
 export default class JobSearchView extends Component {
     constructor(props) {
@@ -36,7 +34,6 @@ export default class JobSearchView extends Component {
         this.categoryClickHandler = this.categoryClickHandler.bind(this);
         this.removeCategoryHandler = this.removeCategoryHandler.bind(this);
         this.fetchJobListings = this.fetchJobListings.bind(this);
-        // this.categorySearchHandler = this.categorySearchHandler.bind(this);
         this.searchButtonHandler = this.searchButtonHandler.bind(this);
         this.categorySearchChangeHandler = this.categorySearchChangeHandler.bind(this);
 
@@ -108,12 +105,6 @@ export default class JobSearchView extends Component {
             };
         });
     }
-
-    // categorySearchHandler(value) {
-    //     console.log(value);
-    //     // categoryClickHandler expects input in format of {object}.key = value
-    //     this.categoryClickHandler({ key: value })
-    // }
 
 
     loadJobByLink(link) {
@@ -190,8 +181,6 @@ export default class JobSearchView extends Component {
                         <Grid.Row >
                             <Grid.Column width={4} style={maxHeightStyle}>
                                 <SearchOptions
-                                    categories={categories}
-                                    locations={locations}
                                     searchButtonHandler={this.searchButtonHandler}
                                     selectedCategories={this.state.selectedCategories}
                                     categorySearchChangeHandler={this.categorySearchChangeHandler}
@@ -199,12 +188,12 @@ export default class JobSearchView extends Component {
                                     selectedRadius={this.state.selectedRadius}
                                     locationChangeHandler={this.locationChangeHandler}
                                     radiusChangeHandler={this.radiusChangeHandler} />
-                                {/* <Sidebar
+                                <Sidebar
                                     categoryClickHandler={this.categoryClickHandler}
                                     selectedCategories={this.state.selectedCategories}
                                     removeCategoryHandler={this.removeCategoryHandler}
                                     categorySearchHandler={this.categorySearchHandler}
-                                /> */}
+                                />
                             </Grid.Column>
                             <Grid.Column width={4} style={maxHeightStyle}>
                                 <ItemList
