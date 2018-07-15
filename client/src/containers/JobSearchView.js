@@ -32,7 +32,6 @@ export default class JobSearchView extends Component {
         this.jobClickHandler = this.jobClickHandler.bind(this);
         this.loadJobByLink = this.loadJobByLink.bind(this);
         this.categoryClickHandler = this.categoryClickHandler.bind(this);
-        this.removeCategoryHandler = this.removeCategoryHandler.bind(this);
         this.fetchJobListings = this.fetchJobListings.bind(this);
         this.searchButtonHandler = this.searchButtonHandler.bind(this);
         this.categorySearchChangeHandler = this.categorySearchChangeHandler.bind(this);
@@ -49,12 +48,10 @@ export default class JobSearchView extends Component {
         const keywordsArray = this.state.selectedCategories;
         const location = isEmpty(this.state.selectedLocation) ? "" : this.state.selectedLocation;
         const radius = isEmpty(this.state.selectedRadius) ? "" : this.state.selectedRadius;
-        // const requestOptions = {keywords, location, radius};
         let jobs = [];
 
         if (typeof keywordsArray !== 'undefined' && keywordsArray.length > 0) {
             // the array is defined and has at least one element
-            console.log("fetchJobListings - Inside multiple category search");
             keywordsArray.forEach((keyword) => {
                 axios
                     .post('https://cors-anywhere.herokuapp.com/https://ba.jooble.org/api/336d41a0-2c32-42fe-9a4f-351cda0f1187', {
@@ -77,16 +74,13 @@ export default class JobSearchView extends Component {
         }
         else {
             // array is empty, so get recent job postings
-            console.log("fetchJobListings - Recent posts");
             axios.post('https://cors-anywhere.herokuapp.com/https://ba.jooble.org/api/336d41a0-2c32-42fe-9a4f-351cda0f1187', {
                 keywords: " ",
                 location: location,
                 radius: radius
             })
                 .then((response) => {
-                    // console.log("Recent jobs - response", response.data.jobs);
                     jobs = response.data.jobs;
-                    // console.log("Recent jobs - Jobs", jobs);
                     this.setState({ jobs });
                 })
                 .catch(function (error) {
@@ -134,24 +128,7 @@ export default class JobSearchView extends Component {
             return {
                 selectedCategories: currentCategories
             };
-        }, this.fetchJobListings);
-    }
-
-    removeCategoryHandler(category) {
-        // console.log(category);
-        this.setState((prevState => {
-            const currentCategories = prevState.selectedCategories;
-            const elementIndex = currentCategories.indexOf(category.category);
-            // console.log("Element index", elementIndex, "selected Categories", this.state.selectedCategories);
-            if (elementIndex > -1) {
-                // If category exists delete it from array by splicing at elementIndex and deleting one
-                currentCategories.splice(elementIndex, 1);
-            }
-
-            return {
-                selectedCategories: currentCategories
-            }
-        }), this.fetchJobListings);
+        });
     }
 
     searchButtonHandler = (e) => {
@@ -191,7 +168,6 @@ export default class JobSearchView extends Component {
                                 <Sidebar
                                     categoryClickHandler={this.categoryClickHandler}
                                     selectedCategories={this.state.selectedCategories}
-                                    removeCategoryHandler={this.removeCategoryHandler}
                                     categorySearchHandler={this.categorySearchHandler}
                                 />
                             </Grid.Column>

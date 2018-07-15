@@ -28,7 +28,6 @@ export default class CategorySearch extends Component {
     }
 
     handleAddition = (e, { value }) => {
-        console.log(value);
         this.setState({
             dropdownOptions: [{ text: value, value, key: value }, ...this.state.dropdownOptions],
         })
